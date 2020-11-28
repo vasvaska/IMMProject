@@ -32,10 +32,6 @@ public class SecondFragment extends Fragment {
             }
         });
         Toast.makeText(view.getContext(), "HELLOW ORLD", Toast.LENGTH_LONG).show();
-        Toast.makeText(view.getContext(), "HELLOW ORLD", Toast.LENGTH_LONG).show();
-        Toast.makeText(view.getContext(), "HELLOW ORLD", Toast.LENGTH_LONG).show();
-        Toast.makeText(view.getContext(), "HELLOW ORLD", Toast.LENGTH_SHORT).show();
-        Toast.makeText(view.getContext(), "HELLOW ORLD", Toast.LENGTH_LONG).show();
-        Toast.makeText(view.getContext(), "HELLOW ORLD", Toast.LENGTH_LONG).show();
+
     }
 }
