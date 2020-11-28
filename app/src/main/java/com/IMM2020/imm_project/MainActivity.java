@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
                 Toast.makeText(view.getContext(), "HELLOW ORLD", Toast.LENGTH_LONG).show();
                 Toast.makeText(view.getContext(), "HELLOW ORLD", Toast.LENGTH_LONG).show();
-                Toast.makeText(view.getContext(), "HELLOW ORLD", Toast.LENGTH_LONG).show();
             }
         });
     }
