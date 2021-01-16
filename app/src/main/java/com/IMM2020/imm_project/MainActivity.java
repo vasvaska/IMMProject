@@ -1,6 +1,8 @@
 package com.IMM2020.imm_project;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,19 +20,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Log.i("Myo","MYOHERE");
+        //startActivity(new Intent(this, MyoFragment.class));
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        /*FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                Toast.makeText(view.getContext(), "HELLOW ORLD", Toast.LENGTH_LONG).show();
-                Toast.makeText(view.getContext(), "HELLOW ORLD", Toast.LENGTH_LONG).show();
+                //Toast.makeText(view.getContext(), "HELLO WORLD", Toast.LENGTH_LONG).show();
             }
-        });
+        });*/
     }
 
     @Override
