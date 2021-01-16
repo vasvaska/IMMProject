@@ -13,9 +13,9 @@ import java.util.Random;
 
 public class DataParser {
 
-    static int[][] parseData(Context ctx, Activity act){
+    static int[][] parseData(Context ctx, Activity act, int index){
 
-        int index = 4;
+        //index = 0;
 
         InputStream ins = ctx.getResources().openRawResource
                 (
