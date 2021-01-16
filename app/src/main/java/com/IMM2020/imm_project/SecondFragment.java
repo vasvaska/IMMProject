@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -37,6 +40,9 @@ public class SecondFragment extends Fragment implements AdapterView.OnItemSelect
     LineGraphSeries[] emgSeries = new LineGraphSeries[]{series0, series1, series2, series3, series4, series5, series6, series7};
     private int cur = 0;
     private int[][] emgDataSet;
+    int[] color = {Color.BLUE, Color.RED, Color.GREEN, Color.YELLOW, Color.LTGRAY, Color.CYAN, Color.MAGENTA, Color.BLACK};
+
+    private CheckBox[] checkBoxes;
 
     GraphView graph;
 
@@ -54,12 +60,29 @@ public class SecondFragment extends Fragment implements AdapterView.OnItemSelect
         super.onViewCreated(view, savedInstanceState);
 
         graph = getView().findViewById(R.id.graph);
+        checkBoxes = new CheckBox[]{getView().findViewById(R.id.checkBox0), getView().findViewById(R.id.checkBox1), getView().findViewById(R.id.checkBox2), getView().findViewById(R.id.checkBox3),
+                getView().findViewById(R.id.checkBox4), getView().findViewById(R.id.checkBox5), getView().findViewById(R.id.checkBox6), getView().findViewById(R.id.checkBox7)};
+
+
 
         // add all series again
-        int[] color = {Color.BLUE, Color.RED, Color.GREEN, Color.YELLOW, Color.LTGRAY, Color.CYAN, Color.MAGENTA, Color.BLACK};
+
         for (int i = 0; i < 8; i++) {
             graph.addSeries(emgSeries[i]);
             emgSeries[i].setColor(color[i]);
+            checkBoxes[i].setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    for (int i = 0; i < 8; i++) {
+                        if(buttonView == checkBoxes[i]) {
+                            if(!isChecked){emgSeries[i].setColor(Color.TRANSPARENT);}
+                            else{ emgSeries[i].setColor(color[i]);}
+                            Log.i("Checked", ""+emgSeries[i]);
+                            return;
+                        }
+                    }
+                }
+            });
         }
 
         Spinner spinner = getView().findViewById(R.id.spinner);
@@ -119,13 +142,27 @@ public class SecondFragment extends Fragment implements AdapterView.OnItemSelect
         //for (int i = 0; i < 8; i++) { emgSeries[i].resetData(new DataPointInterface[])}
         for (int i = 0; i < 8; i++) {
             emgSeries[i].resetData(new DataPointInterface[]{});
-            drawGraph(position);
-            cur = 0;
-            emgSeries[i].setColor(Color.TRANSPARENT);
+            //emgSeries[i].setColor(Color.TRANSPARENT);
         }
+
+        drawGraph(position);
+        cur = 0;
     }
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+    /*public void onCheckboxClicked(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
+
+        for (int i = 0; i < 8; i++) {
+            if(view == checkBoxes[i]) {
+                if(checked){emgSeries[i].setColor(Color.TRANSPARENT);}
+                else{ emgSeries[i].setColor(color[i]);}
+                return;
+            }
+        }
+    }*/
 }
