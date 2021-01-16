@@ -35,14 +35,16 @@ public class SecondFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-/*
         double y;
         double x;
 
-        GraphView graphView = (GraphView) findViewById(R.id.graph);
+        GraphView graphView = (GraphView) getView().findViewById(R.id.graph);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[]{
-                new DataPoint(0,1)
-        });*/
+                /*new DataPoint(1,1),
+                new DataPoint(2,2),
+                new DataPoint(3,1)*/
+        });
+        graphView.addSeries(series);
 
         view.findViewById(R.id.button_second).setOnClickListener(new View.OnClickListener() {
             @Override
