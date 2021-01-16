@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
         //Log.i("Myo","MYOHERE");
         //startActivity(new Intent(this, MyoFragment.class));
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        /*Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);*/
 
         /*FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
