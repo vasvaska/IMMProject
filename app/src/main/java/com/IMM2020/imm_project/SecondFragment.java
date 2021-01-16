@@ -1,5 +1,6 @@
 package com.IMM2020.imm_project;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -22,7 +23,14 @@ import java.util.Random;
 public class SecondFragment extends Fragment {
 
     private Handler mHandler = new Handler();
-    LineGraphSeries<DataPoint> series;
+    LineGraphSeries<DataPoint> series1 = new LineGraphSeries<>(new DataPoint[]{});
+    LineGraphSeries<DataPoint> series2 = new LineGraphSeries<>(new DataPoint[]{});
+    LineGraphSeries<DataPoint> series3 = new LineGraphSeries<>(new DataPoint[]{});
+    LineGraphSeries<DataPoint> series4 = new LineGraphSeries<>(new DataPoint[]{});
+    LineGraphSeries<DataPoint> series5 = new LineGraphSeries<>(new DataPoint[]{});
+    LineGraphSeries<DataPoint> series6 = new LineGraphSeries<>(new DataPoint[]{});
+    LineGraphSeries<DataPoint> series7 = new LineGraphSeries<>(new DataPoint[]{});
+    LineGraphSeries<DataPoint> series8 = new LineGraphSeries<>(new DataPoint[]{});
     private double cur = 0;
 
     @Override
@@ -39,21 +47,22 @@ public class SecondFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
-        double y;
-        double x;
-
-        GraphView graphView = (GraphView) getView().findViewById(R.id.graph);
+        GraphView graphView = getView().findViewById(R.id.graph);
 
         GridLabelRenderer glr = graphView.getGridLabelRenderer();
         glr.setPadding(60); // should allow for 3 digits to fit on screen
 
-        series = new LineGraphSeries<>(new DataPoint[]{
+        /*series1 = new LineGraphSeries<>(new DataPoint[]{
                 new DataPoint(1,1),
                 new DataPoint(2,2),
                 new DataPoint(3,1)
         });
-        graphView.addSeries(series);
+        series2 = new LineGraphSeries<>(new DataPoint[]{});*/
+
+        graphView.addSeries(series1);
+        series1.setColor(Color.RED);
+        graphView.addSeries(series2);
+        series1.setColor(Color.GREEN);
 
         graphView.getViewport().setMinX(0);
         graphView.getViewport().setMaxX(1000);
@@ -81,9 +90,10 @@ public class SecondFragment extends Fragment {
             @Override
             public void run() {
                 cur+=10;
-                series.appendData(new DataPoint(cur, new Random().nextInt(10)), false, 200);
+                series1.appendData(new DataPoint(cur, new Random().nextInt(10)), false, 200);
+                series2.appendData(new DataPoint(cur, new Random().nextInt(10)), false, 200);
                 if(cur<=1000){addDataPoints();}
             }
-        }, 100);
+        }, 25);
     }
 }
