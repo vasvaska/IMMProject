@@ -27,17 +27,18 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 public class SecondFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private Handler mHandler = new Handler();
-    //LineGraphSeries<DataPoint>  series0, series1, series2, series3, series4, series5, series6, series7  = new LineGraphSeries<>(new DataPoint[]{});
-    LineGraphSeries<DataPoint>  series0  = new LineGraphSeries<>(new DataPoint[]{});
+    LineGraphSeries<DataPoint>  series0, series1, series2, series3, series4, series5, series6, series7;
+    /*LineGraphSeries<DataPoint>  series0  = new LineGraphSeries<>(new DataPoint[]{});
     LineGraphSeries<DataPoint>  series1  = new LineGraphSeries<>(new DataPoint[]{});
     LineGraphSeries<DataPoint>  series2  = new LineGraphSeries<>(new DataPoint[]{});
     LineGraphSeries<DataPoint>  series3  = new LineGraphSeries<>(new DataPoint[]{});
     LineGraphSeries<DataPoint>  series4  = new LineGraphSeries<>(new DataPoint[]{});
     LineGraphSeries<DataPoint>  series5  = new LineGraphSeries<>(new DataPoint[]{});
     LineGraphSeries<DataPoint>  series6  = new LineGraphSeries<>(new DataPoint[]{});
-    LineGraphSeries<DataPoint>  series7  = new LineGraphSeries<>(new DataPoint[]{});
+    LineGraphSeries<DataPoint>  series7  = new LineGraphSeries<>(new DataPoint[]{});*/
 
     LineGraphSeries[] emgSeries = new LineGraphSeries[]{series0, series1, series2, series3, series4, series5, series6, series7};
+
     private int cur = 0;
     private int[][] emgDataSet;
     int[] color = {Color.BLUE, Color.RED, Color.GREEN, Color.YELLOW, Color.LTGRAY, Color.CYAN, Color.MAGENTA, Color.BLACK};
@@ -51,6 +52,9 @@ public class SecondFragment extends Fragment implements AdapterView.OnItemSelect
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
+        for (int i = 0; i < 8; i++) {
+            emgSeries[i] = new LineGraphSeries<>(new DataPoint[]{});
+        }
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_second, container, false);
@@ -77,6 +81,7 @@ public class SecondFragment extends Fragment implements AdapterView.OnItemSelect
                         if(buttonView == checkBoxes[i]) {
                             if(!isChecked){emgSeries[i].setColor(Color.TRANSPARENT);}
                             else{ emgSeries[i].setColor(color[i]);}
+                            graph.onDataChanged(true, false); //to change lines visibility whn graph is still
                             Log.i("Checked", ""+emgSeries[i]);
                             return;
                         }
@@ -89,7 +94,7 @@ public class SecondFragment extends Fragment implements AdapterView.OnItemSelect
         ArrayAdapter<CharSequence> adapter =ArrayAdapter.createFromResource(getContext(), R.array.gestures, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource((android.R.layout.simple_spinner_dropdown_item));
         spinner.setAdapter(adapter);
-        //spinner.setOn
+
         spinner.setOnItemSelectedListener(this);
 
         GridLabelRenderer glr = graph.getGridLabelRenderer();
@@ -112,7 +117,6 @@ public class SecondFragment extends Fragment implements AdapterView.OnItemSelect
     private void drawGraph(int index){
         emgDataSet = DataParser.parseData(getContext(), getActivity(), index);
 
-
         graph.getViewport().setMinX(0);
         graph.getViewport().setMaxX(emgDataSet.length*1.5);
         graph.getViewport().setXAxisBoundsManual(true);
@@ -124,7 +128,6 @@ public class SecondFragment extends Fragment implements AdapterView.OnItemSelect
 
         addDataPoints();
     }
-
 
     private void addDataPoints(){
 
@@ -139,30 +142,15 @@ public class SecondFragment extends Fragment implements AdapterView.OnItemSelect
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        //for (int i = 0; i < 8; i++) { emgSeries[i].resetData(new DataPointInterface[])}
+
         for (int i = 0; i < 8; i++) {
             emgSeries[i].resetData(new DataPointInterface[]{});
-            //emgSeries[i].setColor(Color.TRANSPARENT);
         }
-
         drawGraph(position);
         cur = 0;
     }
+
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    public void onNothingSelected(AdapterView<?> parent){/*empty*/}
 
-    }
-
-    /*public void onCheckboxClicked(View view) {
-        // Is the view now checked?
-        boolean checked = ((CheckBox) view).isChecked();
-
-        for (int i = 0; i < 8; i++) {
-            if(view == checkBoxes[i]) {
-                if(checked){emgSeries[i].setColor(Color.TRANSPARENT);}
-                else{ emgSeries[i].setColor(color[i]);}
-                return;
-            }
-        }
-    }*/
 }

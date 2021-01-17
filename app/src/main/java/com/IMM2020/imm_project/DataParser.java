@@ -15,8 +15,6 @@ public class DataParser {
 
     static int[][] parseData(Context ctx, Activity act, int index){
 
-        //index = 0;
-
         InputStream ins = ctx.getResources().openRawResource
                 (
                         ctx.getResources().getIdentifier("emg_" + index, "raw", act.getPackageName())
@@ -44,7 +42,6 @@ public class DataParser {
                 continue;
 
             String newValues[] = line.split(" ");
-            //EmgData emg = new EmgData();
 
             for (int column = 0; column < 8; column++) {
                 emgDataSet[row][column] = Integer.parseInt(newValues[column]);
