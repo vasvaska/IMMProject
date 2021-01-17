@@ -42,7 +42,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener   {
         switch (v.getId()){
             case R.id.btn_one:
                 if(btn_one.getText() == answer){
-                    Toast.makeText(FirstFragment.this, "You Are Correct", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "You Are Correct", Toast.LENGTH_SHORT).show();
                     NextQuestion(random.nextInt(questionLength));
                 }else{
                     GameOver();
@@ -52,7 +52,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener   {
 
             case R.id.btn_two:
                 if(btn_two.getText() == answer){
-                    Toast.makeText(FirstFragment.this, "You Are Correct", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "You Are Correct", Toast.LENGTH_SHORT).show();
                     NextQuestion(random.nextInt(questionLength));
                 }else{
                     GameOver();
@@ -62,7 +62,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener   {
 
             case R.id.btn_three:
                 if(btn_three.getText() == answer){
-                    Toast.makeText(FirstFragment.this, "You Are Correct", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "You Are Correct", Toast.LENGTH_SHORT).show();
                     NextQuestion(random.nextInt(questionLength));
                 }else{
                     GameOver();
@@ -72,7 +72,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener   {
 
             case R.id.btn_four:
                 if(btn_four.getText() == answer){
-                    Toast.makeText(FirstFragment.this, "You Are Correct", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "You Are Correct", Toast.LENGTH_SHORT).show();
                     NextQuestion(random.nextInt(questionLength));
                 }else{
                     GameOver();
@@ -83,14 +83,14 @@ public class FirstFragment extends Fragment implements View.OnClickListener   {
     }
 
     private void GameOver(){
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(FirstFragment.this);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
         alertDialogBuilder
                 .setMessage("Game Over")
                 .setCancelable(false)
                 .setPositiveButton("New Game", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(getApplicationContext(), FirstFragment.class));
+                        startActivity(new Intent(getContext(), FirstFragment.class));
                     }
                 })
                 .setNegativeButton("Exit", new DialogInterface.OnClickListener() {
