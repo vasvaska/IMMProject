@@ -1,7 +1,6 @@
 package com.IMM2020.imm_project;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +20,7 @@ public class FirstFragment extends Fragment {
     Button btn_one, btn_two, btn_three, btn_four;
     TextView tv_question;
 
-    private Question QuestionList = new Question(this.getContext());
+    private Question QuestionList = new Question();
 
     private String answer;
     private int questionLength = QuestionList.questions.length;

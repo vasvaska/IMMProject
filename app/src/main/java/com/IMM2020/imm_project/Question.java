@@ -1,10 +1,15 @@
 package com.IMM2020.imm_project;
 
+
 public class Question {
-    public String questions[] = {
-            "Which is a Programming Language?",
-            "In COMAL language program, after name of procedure parameters must be in?",
-            "Programming language COBOL works best for use in?"
+
+    public String[] questions = {
+
+            "Addition of motor units to increase the force of contraction in muscles is called what?",
+            "An EMG Signal is:",
+            "Consists of a motor neuron and all the skeletal muscle fibers with which it synapses is:",
+            "Nerve cells that Transmit information to muscles are called what?",
+            "The Conduction velocity of motor nerves is approximately:"
     };
 
     public String[][] choices = {
