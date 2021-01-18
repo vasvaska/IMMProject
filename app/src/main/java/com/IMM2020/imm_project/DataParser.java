@@ -5,6 +5,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -57,6 +58,7 @@ public class DataParser {
     }
 
     static int[][] parseData(Context ctx, Activity act, Uri path) {
+        Log.d("DEBUG", "FILE SHOWING");
         ContentResolver cR = ctx.getContentResolver();
         InputStream ins = null;
         try {
