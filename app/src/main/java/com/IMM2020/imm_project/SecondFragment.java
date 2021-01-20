@@ -28,12 +28,21 @@ public class SecondFragment extends Fragment {
 
     Random random = new Random();
     int currQuestion = 0;
+    private static int rightAnswers = 0;
+    private View reverseView;
+
+    public static void resetCounter() {
+
+        rightAnswers = 0;
+    }
 
     public static SecondFragment newInstance() {
         SecondFragment fragment = new SecondFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("section number", 1);
         fragment.setArguments(bundle);
+        resetCounter();
+
         return fragment;
     }
 
@@ -43,6 +52,7 @@ public class SecondFragment extends Fragment {
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
+        rightAnswers = 0;
 
         return inflater.inflate(R.layout.fragment_second, container, false);
 
@@ -57,7 +67,7 @@ public class SecondFragment extends Fragment {
             switch (v.getId()) {
                 case R.id.btn_one:
                     if (btn_one.getText() == answer) {
-                        Correct();
+                        ShowCorrectSnack();
                         NextQuestion();
                     } else {
                         GameOver();
@@ -67,7 +77,7 @@ public class SecondFragment extends Fragment {
 
                 case R.id.btn_two:
                     if (btn_two.getText() == answer) {
-                        Correct();
+                        ShowCorrectSnack();
                         NextQuestion();
                     } else {
                         GameOver();
@@ -77,7 +87,7 @@ public class SecondFragment extends Fragment {
 
                 case R.id.btn_three:
                     if (btn_three.getText() == answer) {
-                        Correct();
+                        ShowCorrectSnack();
                         NextQuestion();
                     } else {
                         GameOver();
@@ -87,7 +97,7 @@ public class SecondFragment extends Fragment {
 
                 case R.id.btn_four:
                     if (btn_four.getText() == answer) {
-                        Correct();
+                        ShowCorrectSnack();
                         NextQuestion();
                     } else {
                         GameOver();
@@ -98,9 +108,10 @@ public class SecondFragment extends Fragment {
         }
     };
 
-    private void Correct() {
-        Snackbar.make(tv_question, R.string.correctAnswer, Snackbar.LENGTH_SHORT).setTextColor(Color.YELLOW).show();
-        return;
+    private void ShowCorrectSnack() {
+        rightAnswers++;
+        Snackbar.make(tv_question, this.getResources().getText(R.string.correctAnswer) + "\t Total: " + rightAnswers, Snackbar.LENGTH_SHORT).setTextColor(Color.YELLOW).show();
+
     }
 
     private void GameOver() {
@@ -145,7 +156,9 @@ public class SecondFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         random.nextInt();
+        rightAnswers = 0;
         btn_one = view.findViewById(R.id.btn_one);
         btn_one.setOnClickListener(clicker);
 

@@ -140,6 +140,8 @@ public class FirstFragment extends Fragment implements AdapterView.OnItemSelecte
         graph.getViewport().setScalable(true);
 
         glr.setTextSize(40f);
+
+        glr.setLabelVerticalWidth(0);
         glr.setHorizontalAxisTitle("Time /ms");
         glr.setVerticalAxisTitle("Voltage / μV");
         glr.setNumHorizontalLabels(5);
