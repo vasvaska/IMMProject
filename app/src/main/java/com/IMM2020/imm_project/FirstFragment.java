@@ -33,14 +33,6 @@ public class FirstFragment extends Fragment implements AdapterView.OnItemSelecte
     private Runnable mHandlerTask;
 
     LineGraphSeries<DataPoint> series0, series1, series2, series3, series4, series5, series6, series7;
-    /*LineGraphSeries<DataPoint>  series0  = new LineGraphSeries<>(new DataPoint[]{});
-    LineGraphSeries<DataPoint>  series1  = new LineGraphSeries<>(new DataPoint[]{});
-    LineGraphSeries<DataPoint>  series2  = new LineGraphSeries<>(new DataPoint[]{});
-    LineGraphSeries<DataPoint>  series3  = new LineGraphSeries<>(new DataPoint[]{});
-    LineGraphSeries<DataPoint>  series4  = new LineGraphSeries<>(new DataPoint[]{});
-    LineGraphSeries<DataPoint>  series5  = new LineGraphSeries<>(new DataPoint[]{});
-    LineGraphSeries<DataPoint>  series6  = new LineGraphSeries<>(new DataPoint[]{});
-    LineGraphSeries<DataPoint>  series7  = new LineGraphSeries<>(new DataPoint[]{});*/
 
     LineGraphSeries[] emgSeries = new LineGraphSeries[]{series0, series1, series2, series3, series4, series5, series6, series7};
 
@@ -140,10 +132,12 @@ public class FirstFragment extends Fragment implements AdapterView.OnItemSelecte
         graph.getViewport().setScalable(true);
 
         glr.setTextSize(40f);
-
+        glr.setHorizontalAxisTitle("Time [ms]");
+        glr.setVerticalAxisTitle("Voltage [μV]");
         glr.setLabelVerticalWidth(0);
-        glr.setHorizontalAxisTitle("Time /ms");
-        glr.setVerticalAxisTitle("Voltage / μV");
+        glr.setHorizontalLabelsAngle(90);
+        glr.setVerticalAxisTitleTextSize(55);
+        glr.setHorizontalAxisTitleTextSize(55);
         glr.setNumHorizontalLabels(5);
         glr.reloadStyles();
 

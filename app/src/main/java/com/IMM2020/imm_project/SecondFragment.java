@@ -55,7 +55,6 @@ public class SecondFragment extends Fragment {
         rightAnswers = 0;
 
         return inflater.inflate(R.layout.fragment_second, container, false);
-
     }
 
 
@@ -172,8 +171,5 @@ public class SecondFragment extends Fragment {
         btn_four.setOnClickListener(clicker);
         tv_question = view.findViewById(R.id.tv_question);
         NextQuestion();
-
-
-
     }
 }
