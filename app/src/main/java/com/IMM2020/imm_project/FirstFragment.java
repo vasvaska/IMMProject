@@ -20,15 +20,15 @@ public class FirstFragment extends Fragment {
     Button btn_one, btn_two, btn_three, btn_four;
     TextView tv_question;
 
-    private Question QuestionList = new Question();
+    private final Question QuestionList = new Question();
 
     private String answer;
-    private int questionLength = QuestionList.questions.length;
+    private final int questionLength = QuestionList.questions.length;
 
     Random random = new Random();
+    int currQuestion = 0;
 
-
-    @Override
+    //@Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
@@ -40,7 +40,7 @@ public class FirstFragment extends Fragment {
     }
 
 
-    private View.OnClickListener clicker = new View.OnClickListener() {
+    private final View.OnClickListener clicker = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
 
@@ -49,7 +49,7 @@ public class FirstFragment extends Fragment {
                 case R.id.btn_one:
                     if (btn_one.getText() == answer) {
                         Toast.makeText(getContext(), R.string.correctAnswer, Toast.LENGTH_SHORT).show();
-                        NextQuestion(random.nextInt(questionLength));
+                        NextQuestion();
                     } else {
                         GameOver();
                     }
@@ -59,7 +59,7 @@ public class FirstFragment extends Fragment {
                 case R.id.btn_two:
                     if (btn_two.getText() == answer) {
                         Toast.makeText(getContext(), R.string.correctAnswer, Toast.LENGTH_SHORT).show();
-                        NextQuestion(random.nextInt(questionLength));
+                        NextQuestion();
                     } else {
                         GameOver();
                     }
@@ -69,7 +69,7 @@ public class FirstFragment extends Fragment {
                 case R.id.btn_three:
                     if (btn_three.getText() == answer) {
                         Toast.makeText(getContext(), R.string.correctAnswer, Toast.LENGTH_SHORT).show();
-                        NextQuestion(random.nextInt(questionLength));
+                        NextQuestion();
                     } else {
                         GameOver();
                     }
@@ -79,7 +79,7 @@ public class FirstFragment extends Fragment {
                 case R.id.btn_four:
                     if (btn_four.getText() == answer) {
                         Toast.makeText(getContext(), R.string.correctAnswer, Toast.LENGTH_SHORT).show();
-                        NextQuestion(random.nextInt(questionLength));
+                        NextQuestion();
                     } else {
                         GameOver();
                     }
@@ -97,7 +97,7 @@ public class FirstFragment extends Fragment {
                 .setPositiveButton("Try again", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        NextQuestion(random.nextInt(questionLength));
+                        NextQuestion();
                     }
                 })
                 .setNegativeButton("Exit", new DialogInterface.OnClickListener() {
@@ -111,14 +111,21 @@ public class FirstFragment extends Fragment {
     }
 
 
-    private void NextQuestion(int num) {
-        tv_question.setText(QuestionList.getQuestion(num));
-        btn_one.setText(QuestionList.getchoice1(num));
-        btn_two.setText(QuestionList.getchoice2(num));
-        btn_three.setText(QuestionList.getchoice3(num));
-        btn_four.setText(QuestionList.getchoice4(num));
+    private void NextQuestion() {
 
-        answer = QuestionList.getCorrectAnswer(num);
+        int newQuest = random.nextInt(questionLength);
+        if (newQuest == currQuestion) {
+            NextQuestion();
+            return;
+        }
+        tv_question.setText(QuestionList.getQuestion(newQuest));
+        btn_one.setText(QuestionList.getChoice1(newQuest));
+        btn_two.setText(QuestionList.getChoice2(newQuest));
+        btn_three.setText(QuestionList.getChoice3(newQuest));
+        btn_four.setText(QuestionList.getChoice4(newQuest));
+
+        answer = QuestionList.getCorrectAnswer(newQuest);
+        currQuestion = newQuest;
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -136,7 +143,9 @@ public class FirstFragment extends Fragment {
         btn_four = view.findViewById(R.id.btn_four);
         btn_four.setOnClickListener(clicker);
         tv_question = view.findViewById(R.id.tv_question);
-        NextQuestion(random.nextInt(questionLength));
+
+        NextQuestion();
+
         view.findViewById(R.id.button_first).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
