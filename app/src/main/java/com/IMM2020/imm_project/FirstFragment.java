@@ -94,13 +94,13 @@ public class FirstFragment extends Fragment {
         alertDialogBuilder
                 .setMessage("Wrong answer. Correct was: " + answer)
                 .setCancelable(false)
-                .setPositiveButton("Try again", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Next question", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         NextQuestion(random.nextInt(questionLength));
                     }
                 })
-                .setNegativeButton("Exit", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Exit App", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         System.exit(0);

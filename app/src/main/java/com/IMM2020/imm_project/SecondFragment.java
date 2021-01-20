@@ -30,6 +30,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 public class SecondFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private Handler mHandler = new Handler();
+    private Runnable mHandlerTask;
     LineGraphSeries<DataPoint> series0, series1, series2, series3, series4, series5, series6, series7;
     /*LineGraphSeries<DataPoint>  series0  = new LineGraphSeries<>(new DataPoint[]{});
     LineGraphSeries<DataPoint>  series1  = new LineGraphSeries<>(new DataPoint[]{});
@@ -95,6 +96,17 @@ public class SecondFragment extends Fragment implements AdapterView.OnItemSelect
             });
         }
 
+
+        graph.setOnClickListener(new View.OnClickListener() {
+            boolean graphPaused = false;
+            @Override
+            public void onClick(View v) {
+                graphPaused=!graphPaused;
+                if(graphPaused){mHandler.removeCallbacks(mHandlerTask);}
+                else{addDataPoints();}
+            }
+        });
+
         Spinner spinner = getView().findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 getContext(), R.array.gestures, android.R.layout.simple_spinner_item);
@@ -137,7 +149,7 @@ public class SecondFragment extends Fragment implements AdapterView.OnItemSelect
 
     private void addDataPoints() {
 
-        mHandler.postDelayed(new Runnable() {
+        mHandler.postDelayed(mHandlerTask = new Runnable() {
             @Override
             public void run() {
                 for (int i = 0; i < 8; i++) {
