@@ -1,18 +1,19 @@
 package com.IMM2020.imm_project;
 
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Random;
 
@@ -28,6 +29,13 @@ public class SecondFragment extends Fragment {
     Random random = new Random();
     int currQuestion = 0;
 
+    public static SecondFragment newInstance() {
+        SecondFragment fragment = new SecondFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("section number", 1);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
     @Override
     public View onCreateView(
@@ -49,7 +57,7 @@ public class SecondFragment extends Fragment {
             switch (v.getId()) {
                 case R.id.btn_one:
                     if (btn_one.getText() == answer) {
-                        Toast.makeText(getContext(), R.string.correctAnswer, Toast.LENGTH_SHORT).show();
+                        Correct();
                         NextQuestion();
                     } else {
                         GameOver();
@@ -59,7 +67,7 @@ public class SecondFragment extends Fragment {
 
                 case R.id.btn_two:
                     if (btn_two.getText() == answer) {
-                        Toast.makeText(getContext(), R.string.correctAnswer, Toast.LENGTH_SHORT).show();
+                        Correct();
                         NextQuestion();
                     } else {
                         GameOver();
@@ -69,7 +77,7 @@ public class SecondFragment extends Fragment {
 
                 case R.id.btn_three:
                     if (btn_three.getText() == answer) {
-                        Toast.makeText(getContext(), R.string.correctAnswer, Toast.LENGTH_SHORT).show();
+                        Correct();
                         NextQuestion();
                     } else {
                         GameOver();
@@ -79,7 +87,7 @@ public class SecondFragment extends Fragment {
 
                 case R.id.btn_four:
                     if (btn_four.getText() == answer) {
-                        Toast.makeText(getContext(), R.string.correctAnswer, Toast.LENGTH_SHORT).show();
+                        Correct();
                         NextQuestion();
                     } else {
                         GameOver();
@@ -89,6 +97,11 @@ public class SecondFragment extends Fragment {
             }
         }
     };
+
+    private void Correct() {
+        Snackbar.make(tv_question, R.string.correctAnswer, Snackbar.LENGTH_SHORT).setTextColor(Color.YELLOW).show();
+        return;
+    }
 
     private void GameOver() {
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
@@ -104,7 +117,7 @@ public class SecondFragment extends Fragment {
                 .setNeutralButton("Show Answer", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getContext(), "Correct answer was " + answer, Toast.LENGTH_SHORT).show();
+                        Snackbar.make(tv_question, "Correct answer was: " + answer, Snackbar.LENGTH_LONG).setTextColor(Color.YELLOW).show();
                         NextQuestion();
                     }
                 });
@@ -147,14 +160,7 @@ public class SecondFragment extends Fragment {
         tv_question = view.findViewById(R.id.tv_question);
         NextQuestion();
 
-        view.findViewById(R.id.button_first).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(SecondFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
-            }
 
-        });
 
     }
 }

@@ -1,5 +1,6 @@
 package com.IMM2020.imm_project;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -19,7 +20,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
@@ -54,6 +54,15 @@ public class FirstFragment extends Fragment implements AdapterView.OnItemSelecte
     boolean graphPaused = true;
     Spinner spinner;
     ArrayAdapter adapter;
+    private final boolean ismoving = false;
+
+    public static FirstFragment newInstance() {
+        FirstFragment fragment = new FirstFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("section number", 1);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
     @Override
     public View onCreateView(
@@ -68,6 +77,7 @@ public class FirstFragment extends Fragment implements AdapterView.OnItemSelecte
         return inflater.inflate(R.layout.fragment_first, container, false);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -113,6 +123,7 @@ public class FirstFragment extends Fragment implements AdapterView.OnItemSelecte
             }
         });
 
+
         spinner = getView().findViewById(R.id.spinner);
         adapter = ArrayAdapter.createFromResource(
                 getContext(), R.array.gestures, android.R.layout.simple_spinner_item);
@@ -125,17 +136,14 @@ public class FirstFragment extends Fragment implements AdapterView.OnItemSelecte
         glr.setPadding(60); // should allow for 3 digits to fit on screen
 
         graph.getViewport().setScalable(true);
-        graph.getGridLabelRenderer().setTextSize(45f);
-        graph.getGridLabelRenderer().reloadStyles();
+
+        glr.setTextSize(40f);
+        glr.setHorizontalAxisTitle("Time /ms");
+        glr.setVerticalAxisTitle("Voltage / μV");
+        glr.setNumHorizontalLabels(5);
+        glr.reloadStyles();
 
 
-        view.findViewById(R.id.button_second).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(FirstFragment.this)
-                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
-            }
-        });
     }
 
     private void drawGraph(int index) {
