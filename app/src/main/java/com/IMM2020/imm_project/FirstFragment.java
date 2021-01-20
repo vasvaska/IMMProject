@@ -55,6 +55,8 @@ public class FirstFragment extends Fragment implements AdapterView.OnItemSelecte
     Spinner spinner;
     ArrayAdapter adapter;
     private final boolean ismoving = false;
+    private String fileName;
+    private Uri filePath;
 
     public static FirstFragment newInstance() {
         FirstFragment fragment = new FirstFragment();
@@ -180,7 +182,14 @@ public class FirstFragment extends Fragment implements AdapterView.OnItemSelecte
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if (position == 14) return;
+        if (position == 14) {
+            for (int i = 0; i < 8; i++) {
+                emgSeries[i].resetData(new DataPointInterface[]{});
+            }
+            cur = 0;
+            drawGraph(filePath);
+            return;
+        }
         if (position == 13) {
 
             Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -222,7 +231,8 @@ public class FirstFragment extends Fragment implements AdapterView.OnItemSelecte
         }
 
         Log.d(data.getData().getPath(), "debug");
-        String fileName = data.getData().getLastPathSegment().substring(data.getData().getLastPathSegment().lastIndexOf("/") + 1);
+        fileName = data.getData().getLastPathSegment().substring(data.getData().getLastPathSegment().lastIndexOf("/") + 1);
+        filePath = data.getData();
         Log.d(data.getData().getLastPathSegment().substring(data.getData().getLastPathSegment().lastIndexOf("/") + 1), "debug");
         ArrayAdapter a = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_dropdown_item);
         a.addAll(getContext().getResources().getStringArray(R.array.gestures));
