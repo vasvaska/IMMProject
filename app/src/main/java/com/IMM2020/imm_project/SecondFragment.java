@@ -20,10 +20,10 @@ public class SecondFragment extends Fragment {
     Button btn_one, btn_two, btn_three, btn_four;
     TextView tv_question;
 
-    private Question QuestionList = new Question();
+    private final Question QuestionList = new Question();
 
     private String answer;
-    private int questionLength = QuestionList.questions.length;
+    private final int questionLength = QuestionList.questions.length;
 
     Random random = new Random();
 
@@ -40,13 +40,12 @@ public class SecondFragment extends Fragment {
     }
 
 
-    private View.OnClickListener clicker = new View.OnClickListener() {
+    private final View.OnClickListener clicker = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
 
 
             switch (v.getId()) {
-
                 case R.id.btn_one:
                     if (btn_one.getText() == answer) {
                         Toast.makeText(getContext(), R.string.correctAnswer, Toast.LENGTH_SHORT).show();
@@ -114,10 +113,10 @@ public class SecondFragment extends Fragment {
 
     private void NextQuestion(int num) {
         tv_question.setText(QuestionList.getQuestion(num));
-        btn_one.setText(QuestionList.getchoice1(num));
-        btn_two.setText(QuestionList.getchoice2(num));
-        btn_three.setText(QuestionList.getchoice3(num));
-        btn_four.setText(QuestionList.getchoice4(num));
+        btn_one.setText(QuestionList.getChoice1(num));
+        btn_two.setText(QuestionList.getChoice2(num));
+        btn_three.setText(QuestionList.getChoice3(num));
+        btn_four.setText(QuestionList.getChoice4(num));
 
         answer = QuestionList.getCorrectAnswer(num);
     }
@@ -144,6 +143,7 @@ public class SecondFragment extends Fragment {
                 NavHostFragment.findNavController(SecondFragment.this)
                         .navigate(R.id.action_FirstFragment_to_SecondFragment);
             }
+
         });
 
     }
