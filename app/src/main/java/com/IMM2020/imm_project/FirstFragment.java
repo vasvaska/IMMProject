@@ -29,7 +29,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 public class FirstFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
-    private Handler mHandler = new Handler();
+    private final Handler mHandler = new Handler();
     private Runnable mHandlerTask;
 
     LineGraphSeries<DataPoint> series0, series1, series2, series3, series4, series5, series6, series7;
@@ -52,6 +52,8 @@ public class FirstFragment extends Fragment implements AdapterView.OnItemSelecte
 
     GraphView graph;
     boolean graphPaused = true;
+    Spinner spinner;
+    ArrayAdapter adapter;
 
     @Override
     public View onCreateView(
@@ -102,14 +104,17 @@ public class FirstFragment extends Fragment implements AdapterView.OnItemSelecte
         graph.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                graphPaused=!graphPaused;
-                if(graphPaused){mHandler.removeCallbacks(mHandlerTask);}
-                else{addDataPoints();}
+                graphPaused = !graphPaused;
+                if (graphPaused) {
+                    mHandler.removeCallbacks(mHandlerTask);
+                } else {
+                    addDataPoints();
+                }
             }
         });
 
-        Spinner spinner = getView().findViewById(R.id.spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+        spinner = getView().findViewById(R.id.spinner);
+        adapter = ArrayAdapter.createFromResource(
                 getContext(), R.array.gestures, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource((android.R.layout.simple_spinner_dropdown_item));
         spinner.setAdapter(adapter);
@@ -167,6 +172,7 @@ public class FirstFragment extends Fragment implements AdapterView.OnItemSelecte
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if (position == 14) return;
         if (position == 13) {
 
             Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -197,8 +203,26 @@ public class FirstFragment extends Fragment implements AdapterView.OnItemSelecte
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
         super.onActivityResult(requestCode, resultCode, data);
+
+        try {
+            data.equals(null);
+        } catch (Exception e) {
+            Log.e("Result error", "on result Exception");
+            return;
+        }
+
         Log.d(data.getData().getPath(), "debug");
+        String fileName = data.getData().getLastPathSegment().substring(data.getData().getLastPathSegment().lastIndexOf("/") + 1);
+        Log.d(data.getData().getLastPathSegment().substring(data.getData().getLastPathSegment().lastIndexOf("/") + 1), "debug");
+        ArrayAdapter a = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_dropdown_item);
+        a.addAll(getContext().getResources().getStringArray(R.array.gestures));
+        a.add(fileName);
+
+        spinner.setAdapter(a);
+        spinner.setSelection(14);
+
         for (int i = 0; i < 8; i++) {
             emgSeries[i].resetData(new DataPointInterface[]{});
         }

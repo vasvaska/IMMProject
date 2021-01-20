@@ -26,6 +26,7 @@ public class SecondFragment extends Fragment {
     private final int questionLength = QuestionList.questions.length;
 
     Random random = new Random();
+    int currQuestion = 0;
 
 
     @Override
@@ -49,7 +50,7 @@ public class SecondFragment extends Fragment {
                 case R.id.btn_one:
                     if (btn_one.getText() == answer) {
                         Toast.makeText(getContext(), R.string.correctAnswer, Toast.LENGTH_SHORT).show();
-                        NextQuestion(random.nextInt(questionLength));
+                        NextQuestion();
                     } else {
                         GameOver();
                     }
@@ -59,7 +60,7 @@ public class SecondFragment extends Fragment {
                 case R.id.btn_two:
                     if (btn_two.getText() == answer) {
                         Toast.makeText(getContext(), R.string.correctAnswer, Toast.LENGTH_SHORT).show();
-                        NextQuestion(random.nextInt(questionLength));
+                        NextQuestion();
                     } else {
                         GameOver();
                     }
@@ -69,7 +70,7 @@ public class SecondFragment extends Fragment {
                 case R.id.btn_three:
                     if (btn_three.getText() == answer) {
                         Toast.makeText(getContext(), R.string.correctAnswer, Toast.LENGTH_SHORT).show();
-                        NextQuestion(random.nextInt(questionLength));
+                        NextQuestion();
                     } else {
                         GameOver();
                     }
@@ -79,7 +80,7 @@ public class SecondFragment extends Fragment {
                 case R.id.btn_four:
                     if (btn_four.getText() == answer) {
                         Toast.makeText(getContext(), R.string.correctAnswer, Toast.LENGTH_SHORT).show();
-                        NextQuestion(random.nextInt(questionLength));
+                        NextQuestion();
                     } else {
                         GameOver();
                     }
@@ -92,18 +93,19 @@ public class SecondFragment extends Fragment {
     private void GameOver() {
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
         alertDialogBuilder
-                .setMessage("Wrong answer. Correct was: " + answer)
-                .setCancelable(false)
+                .setMessage("Wrong answer.")
+                .setCancelable(true)
                 .setPositiveButton("Next question", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        NextQuestion(random.nextInt(questionLength));
+                        NextQuestion();
                     }
                 })
-                .setNegativeButton("Exit App", new DialogInterface.OnClickListener() {
+                .setNeutralButton("Show Answer", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        System.exit(0);
+                        Toast.makeText(getContext(), "Correct answer was " + answer, Toast.LENGTH_SHORT).show();
+                        NextQuestion();
                     }
                 });
         alertDialogBuilder.show();
@@ -111,7 +113,14 @@ public class SecondFragment extends Fragment {
     }
 
 
-    private void NextQuestion(int num) {
+    private void NextQuestion() {
+        int num = random.nextInt(questionLength);
+        if (num == currQuestion) {
+
+            NextQuestion();
+            return;
+        }
+        currQuestion = num;
         tv_question.setText(QuestionList.getQuestion(num));
         btn_one.setText(QuestionList.getChoice1(num));
         btn_two.setText(QuestionList.getChoice2(num));
@@ -136,7 +145,8 @@ public class SecondFragment extends Fragment {
         btn_four = view.findViewById(R.id.btn_four);
         btn_four.setOnClickListener(clicker);
         tv_question = view.findViewById(R.id.tv_question);
-        NextQuestion(random.nextInt(questionLength));
+        NextQuestion();
+
         view.findViewById(R.id.button_first).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
