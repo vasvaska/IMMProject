@@ -10,10 +10,10 @@
     <string name="correctAnswer">Correct</string>
     <string-array name="gestures">
         <item>Neutral</item>
-        <item>Closing Hand</item>
+        <item>Closed Hand</item>
         <item>Wrist Extension</item>
         <item>Ulnar Deviation</item>
-        <item>Opening Hand</item>
+        <item>Open Hand</item>
         <item>Wrist Flexion</item>
         <item>Radial Deviation</item>
         <item>Letter "I"</item>

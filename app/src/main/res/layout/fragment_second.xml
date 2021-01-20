@@ -3,43 +3,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SecondFragment"
-    android:layout_margin="20dp"
-    android:padding="20dp">
-
-    <Button
-        android:id="@+id/btn_three"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_four"
-        android:layout_marginBottom="0dp"
-        android:text="Button" />
+    android:background="#222f3e"
+    tools:context=".SecondFragment">
 
     <Button
         android:id="@+id/btn_one"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/btn_two"
-        android:layout_marginBottom="0dp"
-        android:text="Button" />
+        android:layout_marginVertical="4sp"
+        android:layout_marginBottom="8dp"
+        android:background="#576574"
+        android:fontFamily="sans-serif-medium"
+        android:text="Button"
+        android:textColor="#c8d6e5"
+        android:textSize="17sp" />
 
     <Button
         android:id="@+id/btn_two"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/btn_three"
-        android:layout_marginBottom="0dp"
+        android:layout_marginVertical="4sp"
+        android:layout_marginBottom="8dp"
+        android:background="#576574"
+        android:fontFamily="sans-serif-medium"
         android:text="Button"
+        android:textColor="#c8d6e5"
+        android:textSize="17sp" />
 
-        />
+    <Button
+        android:id="@+id/btn_three"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_four"
+        android:layout_marginVertical="4sp"
+        android:layout_marginBottom="8dp"
+        android:background="#576574"
+        android:fontFamily="sans-serif-medium"
+        android:text="Button"
+        android:textColor="#c8d6e5"
+        android:textSize="17sp" />
 
     <Button
         android:id="@+id/btn_four"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="60dp"
-        android:text="Button" />
+        android:layout_marginTop="4sp"
+        android:layout_marginBottom="55dp"
+        android:background="#576574"
+        android:fontFamily="sans-serif-medium"
+        android:text="Button"
+        android:textColor="#c8d6e5"
+        android:textSize="17sp" />
 
     <TextView
         android:id="@+id/tv_question"
@@ -48,10 +65,11 @@
         android:layout_above="@+id/btn_one"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:fontFamily="sans-serif-light"
         android:gravity="center_horizontal"
         android:paddingTop="20sp"
-        android:paddingBottom="20dp"
         android:text="Question"
-        android:textSize="25sp" />
+        android:textColor="#c8d6e5"
+        android:textSize="30sp" />
 
 </RelativeLayout>

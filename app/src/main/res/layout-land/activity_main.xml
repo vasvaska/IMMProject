@@ -15,7 +15,7 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
+            android:background="#576574"
             android:rotation="0"
             android:rotationX="0"
             android:rotationY="0" />

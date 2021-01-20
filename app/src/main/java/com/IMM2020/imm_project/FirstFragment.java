@@ -134,10 +134,15 @@ public class FirstFragment extends Fragment implements AdapterView.OnItemSelecte
         glr.setTextSize(40f);
         glr.setHorizontalAxisTitle("Time [ms]");
         glr.setVerticalAxisTitle("Voltage [μV]");
+        glr.setGridColor(Color.WHITE);
         glr.setLabelVerticalWidth(0);
         glr.setHorizontalLabelsAngle(90);
         glr.setVerticalAxisTitleTextSize(55);
         glr.setHorizontalAxisTitleTextSize(55);
+        glr.setHorizontalLabelsColor(Color.WHITE);
+        glr.setVerticalLabelsColor(Color.WHITE);
+        glr.setVerticalAxisTitleColor(Color.WHITE);
+        glr.setHorizontalAxisTitleColor(Color.WHITE);
         glr.setNumHorizontalLabels(5);
         glr.reloadStyles();
 

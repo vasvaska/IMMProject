@@ -3,26 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/SecondFragment">
+    app:startDestination="@id/FirstFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/SecondFragment"
         android:name="com.IMM2020.imm_project.SecondFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_second">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            app:destination="@id/FirstFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
+        android:id="@+id/FirstFragment"
         android:name="com.IMM2020.imm_project.FirstFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_first">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            app:destination="@id/SecondFragment" />
     </fragment>
 </navigation>
