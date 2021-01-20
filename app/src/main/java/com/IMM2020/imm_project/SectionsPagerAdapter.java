@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
-    @StringRes
+
     //private static final int[] TAB_TITLES = new int[]{R.string.app_name, R.string.app_name};
     private static final String[] TAB_TITLES = new String[]{"EMG Data", "Quiz"};
     private final Context mContext;

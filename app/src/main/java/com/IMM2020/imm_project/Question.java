@@ -1,6 +1,5 @@
 package com.IMM2020.imm_project;
 
-
 public class Question {
 
     public String[] questions = {
